@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сравнение поведения localStorage и sessionStorage</title>
+    <style>
+        body { font-family: 'Courier New', Courier, monospace; max-width: 500px; margin: 40px auto; padding: 20px; line-height: 1.5;}
+        .box { border: 1px solid #ccc; padding: 15px; margin-bottom: 15px; border-radius: 5px; }
+        input, button { padding: 8px; margin: 5px; width: 100%; box-sizing: border-box; }
+        button {cursor: pointer; background: rgb(6, 198, 219); color: white; border: none; border-radius: 3px;}
+        button:hover {background: rgb(12, 133, 203); }
+        .reload-btn { background: violet;}
+        .reload-btn:hover { background: darkviolet;}
+    </style>
+</head>
+<body>
+    <h2>Тест объектов веб-хранилищ</h2> 
+
+    <div class="box"> 
+        <label for="username">Введите имя пользователя</label>
+        <input type="text" id="username" placeholder="Арина">
+        <button onclick="saveData()">Сохранить данные в оба хранилища</button>
+    </div>
+
+    <div class="box">
+        <h3>Текущие данные в хранилищах</h3>
+        <p><b>localStorage (username):</b><span id="local-display">пусто</p>
+        <p><b>sessionStorage (username):</b><span id="session-display">пусто</p>
+        <button class="reload-btn" onclick="location.reload()">Перезагрузить страницу</button>
+    </div>
+
+    <script>
+        // Функция для отображения данных при загрузке страницы
+        function updateDisplay(){
+            // Получаем данные по ключу 'username' (getItem()) из хранилиш
+            document.getElementById('local-display').innerText = localStorage.getItem('username') || 'пусто';
+            document.getElementById('session-display').innerText = sessionStorage.getItem('username') || 'пусто';  
+        }
+
+        // Функция для сохранения данных
+        function saveData(){
+            const inputVal = document.getElementById('username').value;
+            if (inputVal) {
+                // Сохраняем пару ключ/значение ('username', inputVal) (setItem()) в хранилища
+                localStorage.setItem('username', inputVal);
+                sessionStorage.setItem('username', inputVal);
+                updateDisplay();
+                document.getElementById('username').value = '';
+            } else {
+                alert('Введите имя');
+            }
+        }
+
+        // Вызов проверки данных сразу при открытии или переагрузке страницы
+        window.onload = updateDisplay;
+    </script>
+</body>
+</html>
