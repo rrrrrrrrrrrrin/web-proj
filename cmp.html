@@ -25,15 +25,15 @@
 
     <div class="box">
         <h3>Текущие данные в хранилищах</h3>
-        <p><b>localStorage (username):</b><span id="local-display">пусто</p>
-        <p><b>sessionStorage (username):</b><span id="session-display">пусто</p>
+        <p><b>localStorage (username): </b><span id="local-display">пусто</p>
+        <p><b>sessionStorage (username): </b><span id="session-display">пусто</p>
         <button class="reload-btn" onclick="location.reload()">Перезагрузить страницу</button>
     </div>
 
     <script>
         // Функция для отображения данных при загрузке страницы
         function updateDisplay(){
-            // Получаем данные по ключу 'username' (getItem()) из хранилиш
+            // Получаем данные по ключу 'username' (getItem()) из хранилищ
             document.getElementById('local-display').innerText = localStorage.getItem('username') || 'пусто';
             document.getElementById('session-display').innerText = sessionStorage.getItem('username') || 'пусто';  
         }
